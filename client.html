@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<head> </head>
+
+<body>
+    <h2>Enter the below details to register:</h2>
+    <form id="form">
+        <label for="fname">Full Name:<br></label><br>
+        <input type="text" id="fname" name="fname" placeholder="First Name"><br><br>
+        <label for="email">Enter Email:<br></label><br>
+        <input type="email" id="email" name="email" placeholder="Email ID"> <br><br>
+        <input type="Submit" value="Register" size="40" onclick="sendData(); return false;">
+		<input type="Submit" value="Confirm" size="40" onclick="updateData(); return false;">
+		<input type="Submit" value="Delete" size="40" onclick="deleteData(); return false;">
+    </form>
+    <script>
+        function sendData() {
+            var data = {
+                name: document.getElementById("fname").value,
+                email: document.getElementById("email").value
+            };
+            fetch("http://localhost:3000/users", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(function (data) {
+                console.log(data.json())
+            })
+        }
+		 function updateData() {
+            var data = {
+                name: document.getElementById("fname").value,
+                email: document.getElementById("email").value
+            };
+            fetch("http://localhost:3000/users", {
+                method: "PUT",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(function (data) {
+                console.log(data.json())
+            })
+        }
+		function deleteData() {
+            var data = {
+                name: document.getElementById("fname").value,
+                email: document.getElementById("email").value
+            };
+            fetch("http://localhost:3000/users", {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(function (data) {
+                console.log(data.json())
+            })
+        }
+    </script>
+</body>
+
+</html>
